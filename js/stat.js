@@ -18,8 +18,6 @@ var COLUMN_WIDTH = 40;
 var COLUMN_GAP = 50;
 var COLUMN_GAP_LEFT = 100;
 var COLUNM_GAP_TOP = 20;
-var min = 10;
-var max = 100;
 var columnColorYou = 'rgba(255, 0, 0, 1)'
 
 
@@ -35,11 +33,11 @@ var drawText = function(ctx, text, x, y, textStyle, color) {
   ctx.fillText(text, x, y);
 };
 
-var getMaxTime = function(times) {
-  var maxTime = times[0];
-  for (var i = 1; i < times.lenght; i++) {
-    if (times[i] > maxTime) {
-      maxTime = times[i];
+var getMaxTime = function(arr) {
+  var maxTime = arr[0];
+  for (var i = 1; i < arr.lenght; i++) {
+    if (arr[i] > maxTime) {
+      maxTime = arr[i];
     }
   }
   return maxTime;
@@ -74,7 +72,7 @@ window.renderStatistics = function(ctx, names, times) {
       if (names[i] === 'Вы') {
         columnColorPlayer = columnColorYou;
       } else {
-        columnColorPlayer = "hsl(240, 100%," + randomNumberFromInterval(min, max) + "%)";
+        columnColorPlayer = "hsl(240, 100%," + randomNumberFromInterval(1, 100) + "%)";
       }
    }
 };
