@@ -1,6 +1,5 @@
 
 // Константы
-
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var CLOUD_HEIGHT = 270;
@@ -21,14 +20,10 @@ var COLUMN_GAP_LEFT = 100;
 var COLUNM_GAP_TOP = 20;
 var min = 10;
 var max = 100;
-// Можно переменные использовать как параметры для функции?
 var columnColorYou = 'rgba(255, 0, 0, 1)'
 
 
 // Функции и переменные
-
-
-
 var drawRect = function(ctx, x, y, width, height, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, width, height);
@@ -70,7 +65,7 @@ window.renderStatistics = function(ctx, names, times) {
     // https://codepen.io/sashasushko/pen/MVzQpp?editors=0010
 
 // рисует столбики
-      var columnHeight = (MAX_COLUMN_HEIGHT * times[i]) / getMaxTime;
+      var columnHeight = (MAX_COLUMN_HEIGHT * times[i]) / getMaxTime(times);
 
       drawRect(ctx, CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_Y + COLUNM_GAP_TOP + (columnHeight - MAX_COLUMN_HEIGHT) + columnHeight, COLUMN_WIDTH, columnHeight, columnColorPlayer);
       drawText(ctx, names[i], CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_Y + COLUNM_GAP_TOP + (columnHeight - MAX_COLUMN_HEIGHT) + columnHeight + TEXL_LINE, TEXT_STYLE, TEXT_COLOR);
@@ -79,7 +74,7 @@ window.renderStatistics = function(ctx, names, times) {
       if (names[i] === 'Вы') {
         columnColorPlayer = columnColorYou;
       } else {
-        columnColorPlayer = "hsl(240, 100%," + randomNumberFromInterval + "%)";
+        columnColorPlayer = "hsl(240, 100%," + randomNumberFromInterval(min, max) + "%)";
       }
    }
 };
