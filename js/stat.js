@@ -27,7 +27,7 @@ var columnColorYou = 'rgba(255, 0, 0, 1)'
 
 // Функции и переменные
 
-var columnHeight = (MAX_COLUMN_HEIGHT * times[i]) / getMaxTime;
+
 
 var drawRect = function(ctx, x, y, width, height, color) {
   ctx.fillStyle = color;
@@ -50,11 +50,10 @@ var getMaxTime = function(times) {
   return maxTime;
 };
 
-  var randomNumberFromInterval = function(min, max) {
-    var randomNumber = min + Math.random() * (max + 1 - min);
-      randomNumber = Math.floor(randomNumber);
-      return randomNumber;
-  }
+var randomNumberFromInterval = function(min, max) {
+  var randomNumber = min + Math.random() * (max + 1 - min);
+    randomNumber = Math.floor(randomNumber);
+    return randomNumber;
 };
 
 window.renderStatistics = function(ctx, names, times) {
@@ -71,6 +70,8 @@ window.renderStatistics = function(ctx, names, times) {
     // https://codepen.io/sashasushko/pen/MVzQpp?editors=0010
 
 // рисует столбики
+      var columnHeight = (MAX_COLUMN_HEIGHT * times[i]) / getMaxTime;
+
       drawRect(ctx, CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_Y + COLUNM_GAP_TOP + (columnHeight - MAX_COLUMN_HEIGHT) + columnHeight, COLUMN_WIDTH, columnHeight, columnColorPlayer);
       drawText(ctx, names[i], CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_Y + COLUNM_GAP_TOP + (columnHeight - MAX_COLUMN_HEIGHT) + columnHeight + TEXL_LINE, TEXT_STYLE, TEXT_COLOR);
       drawText(ctx, Math.floor(times[i]), CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_Y + COLUNM_GAP_TOP + (columnHeight - MAX_COLUMN_HEIGHT) - TEXL_LINE, TEXT_STYLE, TEXT_COLOR);
