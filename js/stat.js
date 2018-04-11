@@ -52,18 +52,19 @@ window.renderStatistics = function(ctx, names, times) {
   drawText(ctx, TEXT_CONG, CLOUD_X + TEXT_GAP, CLOUD_Y + TEXT_GAP, TEXT_STYLE, TEXT_COLOR);
   drawText(ctx, TEXT_RESULT, CLOUD_X + TEXT_GAP, CLOUD_Y + TEXT_GAP + TEXL_LINE, TEXT_STYLE, TEXT_COLOR);
 
+  var columnColorPlayer;
 
-   for (var i = 0; i < names.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     if (names[i] === 'Вы') {
-      var COLUMN_COLOR_PLAYER = COLUMN_COLOR_YOU;
+      columnColorPlayer = COLUMN_COLOR_YOU;
     } else {
-      COLUMN_COLOR_PLAYER = "hsl(240, 100%," + randomNumberFromInterval(2, 100) + "%)";
-  }
+      columnColorPlayer = "hsl(240, 100%," + randomNumberFromInterval(2, 100) + "%)";
+    }
 
-      var columnHeight = (MAX_COLUMN_HEIGHT * times[i]) / getMaxTime(times);
+    var columnHeight = (MAX_COLUMN_HEIGHT * times[i]) / getMaxTime(times);
 
-      drawRect(ctx, CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - columnHeight - TEXL_LINE, COLUMN_WIDTH, columnHeight, COLUMN_COLOR_PLAYER);
-      drawText(ctx, names[i], CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT, TEXT_STYLE, TEXT_COLOR);
-      drawText(ctx, Math.floor(times[i]), CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - columnHeight - TEXL_LINE*2, TEXT_STYLE, TEXT_COLOR);
+    drawRect(ctx, CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - columnHeight - TEXL_LINE, COLUMN_WIDTH, columnHeight, columnColorPlayer);
+    drawText(ctx, names[i], CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT, TEXT_STYLE, TEXT_COLOR);
+    drawText(ctx, Math.floor(times[i]), CLOUD_X + COLUMN_GAP_LEFT + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - columnHeight - TEXL_LINE*2, TEXT_STYLE, TEXT_COLOR);
   }
 };
