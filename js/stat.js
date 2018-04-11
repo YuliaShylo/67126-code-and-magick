@@ -45,8 +45,6 @@ var randomNumberFromInterval = function(min, max) {
     return randomNumber;
 };
 
-var COLUMN_COLOR_PLAYER = "hsl(240, 100%," + randomNumberFromInterval(1, 100) + "%)"
-
 window.renderStatistics = function(ctx, names, times) {
 
   drawRect(ctx, CLOUD_X + SHADOW_SHIFT, CLOUD_Y + SHADOW_SHIFT, CLOUD_WIDTH, CLOUD_HEIGHT, CLOUD_SHADOW);
@@ -57,7 +55,7 @@ window.renderStatistics = function(ctx, names, times) {
 
    for (var i = 0; i < names.length; i++) {
     if (names[i] === 'Вы') {
-      COLUMN_COLOR_PLAYER = COLUMN_COLOR_YOU;
+      var COLUMN_COLOR_PLAYER = COLUMN_COLOR_YOU;
     } else {
       COLUMN_COLOR_PLAYER = "hsl(240, 100%," + randomNumberFromInterval(2, 100) + "%)";
   }
