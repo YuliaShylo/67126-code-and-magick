@@ -1,3 +1,4 @@
+
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var CLOUD_HEIGHT = 270;
