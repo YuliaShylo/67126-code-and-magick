@@ -1,64 +1,66 @@
-// Показываем окно настроек, удаляя у элемента соотв. класс
+var WIZARD_NAMES = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+
+var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+
+var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(, 46, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+
+var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+
+var WIZARD_NUMBER = 4;
+
 document.querySelector('.setup').classList.remove('hidden');
 
 document.querySelector('.setup-similar').classList.remove('hidden');
 
-// переменная, в которой будет блок с персонажем.
-var similarListElement = document.querySelector('.setup-similar-list');
-
-var similarPlayerTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
-var PLAYER_NAMES = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-
-var PLAYER_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-
-var COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(, 46, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-
-var EYES = ['black', 'red', 'blue', 'yellow', 'green'];
-
-
-
-// 1) Не понимаю вот этого: состоящий из 4 сгенерированных из JS объектов, дальше написала цикл, но не уверена что правильно
-// 2) а также зачем нам вообще нужны эти объекты, все это можно брать из переменных выше
-
-// массив из объектов.
-var players = [
-  {
-  name: 'PLAYER_NAMES, PLAYER_SURNAMES',
-  coatColor: COATS,
-  eyeColor: EYES,
-  }
-];
-
-// цикл, который создает объект и закидывает объект в массив
-for (i = 0; i < 4; i++) {
-  players++;
-}
-
-var getRandomNumber = function(min, max) {
+var getRandomNumberFromInterval = function(min, max) {
   var randomNumber = min + Math.random() * (max + 1 - min);
     randomNumber = Math.floor(randomNumber);
     return randomNumber;
 };
 
-// 3) не понимаю, как написать функцию, которая будет создавать DOM-элементы, соответствующие случайно сгенерированным волшебникам.
-// Не очень понимаю какие у функции должны быть параметры, что она должна принимать на вход и откуда брать это
-
-// 4) Не понимаю, куда подставить случайное число.
-// Я собиралась вместо индекса вставиь функцию, которая как раз и будет возвращать случайное число, выбирающее элемент массива имен. Вот так:
- playerElement.querySelector('.wizard-coat').style.fill = player.COATS[getRandomNumber(1, COATS.length-1)];
-
-
-// отрисуем четырех похожих персонажей
-for (var i = 0; i < players.length; i++) {
-  var playerElement = similarPlayerTemplate.cloneNode(true);
-
-  playerElement.querySelector('.setup-similar-label').textContent = PLAYER_NAMES[i] + PLAYER_SURNAMES[i];
-
-  playerElement.querySelector('.wizard-coat').style.fill = COATS[i];
-
-  playerElement.querySelector('.wizard-eyes').style.fill = EYES[i]
-
-  similarListElement.appendChild(playerElement);
+var getRandomArrayItem = function(array) {
+    var index = getRandomNumberFromInterval(0, array.length - 1);
+    return array[index];
 };
+
+var generateWizard = function() {
+  var wizards = [];
+  for (var i = 0; i < WIZARD_NUMBER; i++) {
+    var newWizard = {};
+    newWizard.name = getRandomArrayItem(WIZARD_NAMES) + ' ' + getRandomArrayItem(WIZARD_SURNAMES);
+    newWizard.coatColor = getRandomArrayItem(COAT_COLORS);
+    newWizard.eyeColor = getRandomArrayItem(EYES_COLORS);
+    wizards.push(newWizard);
+  }
+  return wizards;
+};
+
+var generateMarkup = function(wizards) {
+  var wizardElement = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+  wizardElement.querySelector('.setup-similar-label').textContent = newWizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = newWizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = newWizard.eyeColor;
+  return wizardElement;
+};
+
+// Начиная с этой части я не уверена что все правильно.
+
+// находим блок для отрисовки персонажей
+var similarListElement = document.querySelector('setup-similar-list');
+
+// создадим функцию для отрисовки
+var renderWizard = function(wizardElement) {
+  for (var i = 0; i < WIZARD_NUMBER; i++) {
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(wizardElement);
+  }
+  return fragment
+};
+
+// Что поняла сделала.
+//
+
+similarListElement.appendChild(fragment);
+
+
 
